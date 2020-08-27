@@ -27,7 +27,7 @@ composer require typomedia/sysinfo
 ## Usage
 
 ```php
-use Typomedia\Sysinfo\ProviderFactory;
+use Typomedia\Sysinfo\SysinfoFactory;
 use Typomedia\Sysinfo\Exception\UnsupportedSystemException;
 
 /**
@@ -38,24 +38,45 @@ require __DIR__ . '/vendor/autoload.php';
 $start = microtime(true);
 
 try {
-    $provider = ProviderFactory::create();
-    print 'OsType: ' . $provider->getOsType() . PHP_EOL;
-    print 'OsRelease: ' . $provider->getOsRelease() . PHP_EOL;
-    print 'OsKernelVersion: ' . $provider->getOsKernelVersion() . PHP_EOL;
-    print 'Architecture: ' . $provider->getArchitecture() . PHP_EOL;
-    print 'Hostname: ' . $provider->getHostname() . PHP_EOL;
-    print 'CpuModel: ' . $provider->getCpuModel() . PHP_EOL;
-    print 'CpuCores: ' . $provider->getCpuCores() . PHP_EOL;
-    print 'PhpVersion: ' . $provider->getPhpVersion() . PHP_EOL;
-    print 'TotalMem: ' . $provider->getTotalMem() . PHP_EOL;
-    print 'DiskTotal: ' . $provider->getDiskTotal() . PHP_EOL;
-    print 'DiskUsage: ' . $provider->getDiskUsage() . PHP_EOL;
-    print 'DiskFree: ' . $provider->getDiskFree() . PHP_EOL;
+    $sysinfo = SysinfoFactory::create();
+    $values['OsType'] = $sysinfo->getOsType();
+    $values['OsRelease'] = $sysinfo->getOsRelease();
+    $values['OsKernelVersion'] = $sysinfo->getOsKernelVersion();
+    $values['Architecture'] = $sysinfo->getArchitecture();
+    $values['Hostname'] = $sysinfo->getHostname();
+    $values['CpuModel'] = $sysinfo->getCpuModel();
+    $values['CpuCores'] = $sysinfo->getCpuCores();
+    $values['PhpVersion'] = $sysinfo->getPhpVersion();
+    $values['TotalMem'] = $sysinfo->getTotalMem();
+    $values['DiskTotal'] = $sysinfo->getDiskTotal();
+    $values['DiskUsage'] = $sysinfo->getDiskUsage();
+    $values['DiskFree'] = $sysinfo->getDiskFree();
 } catch (UnsupportedSystemException $e) {
-    print $e->getMessage() . PHP_EOL;
+    $values['Exception'] = $e->getMessage();
+}
+
+foreach ($values as $key => $value) {
+    print $key . ': ' . $value . PHP_EOL;
 }
 
 $end  = microtime(true);
 $time = round(($end - $start) * 1000);
 print $time . ' ms' . PHP_EOL;
+```
+
+## Output
+
+```
+OsType: Linux
+OsRelease: Ubuntu 16.04.6 LTS
+OsKernelVersion: 4.15.0-112-generic
+Architecture: x86_64
+Hostname: spaceballs
+CpuModel: Intel(R) Core(TM) i7-3667U CPU @ 2.00GHz
+CpuCores: 2
+PhpVersion: 7.4.7
+TotalMem: 8043172
+DiskTotal: 117981093888
+DiskUsage: 111017865216
+DiskFree: 6963228672
 ```
