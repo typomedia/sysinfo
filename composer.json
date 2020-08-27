@@ -1,0 +1,28 @@
+{
+    "name": "typomedia/sysinfo",
+    "description": "System Information Library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Philipp Speck",
+            "email": "philipp@typo.media"
+        }
+    ],
+    "require": {
+        "php": "^7.2"
+    },
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    },
+    "scripts": {
+        "test": [
+            "phpcs --standard=PSR1,PSR2,PSR12 --error-severity=1 --warning-severity=8 src",
+            "phpmd src text codesize, controversial, design, naming, unusedcode"
+        ],
+        "fix": [
+            "phpcbf --standard=PSR1,PSR2,PSR12 src"
+        ]
+    }
+}
