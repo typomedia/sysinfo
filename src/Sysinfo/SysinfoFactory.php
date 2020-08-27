@@ -8,7 +8,7 @@ use Typomedia\Sysinfo\Provider\MacProvider;
 use Typomedia\Sysinfo\Provider\WindowsProvider;
 use Typomedia\Sysinfo\Exception\UnsupportedSystemException;
 
-class ProviderFactory
+class SysinfoFactory
 {
     /**
      * @return BsdProvider|LinuxProvider|MacProvider|WindowsProvider
