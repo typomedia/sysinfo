@@ -11,6 +11,10 @@
     "require": {
         "php": "^7.2"
     },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.5",
+        "phpmd/phpmd": "^2.8"
+    },
     "autoload": {
         "classmap": [
             "src/"
@@ -18,11 +22,11 @@
     },
     "scripts": {
         "test": [
-            "phpcs --standard=PSR1,PSR2,PSR12 --error-severity=1 --warning-severity=8 src",
-            "phpmd src text codesize, controversial, design, naming, unusedcode"
+            "vendor/bin/phpcs --standard=PSR1,PSR2,PSR12 --error-severity=1 --warning-severity=8 src",
+            "vendor/bin/phpmd src text codesize, controversial, design, naming, unusedcode"
         ],
         "fix": [
-            "phpcbf --standard=PSR1,PSR2,PSR12 src"
+            "vendor/bin/phpcbf --standard=PSR1,PSR12 src"
         ]
     }
 }
