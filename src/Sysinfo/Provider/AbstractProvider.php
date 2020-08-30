@@ -49,7 +49,7 @@ abstract class AbstractProvider implements ProviderInterface
      */
     public function getDiskFree()
     {
-        return disk_free_space('/');
+        return disk_free_space(DIRECTORY_SEPARATOR);
     }
 
     /**

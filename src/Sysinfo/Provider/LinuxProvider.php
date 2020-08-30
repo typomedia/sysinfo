@@ -37,7 +37,7 @@ class LinuxProvider extends AbstractProvider
     public function getCpuCores()
     {
         $cpuinfo = LinuxRepository::getCpuInfo();
-        return $cpuinfo['cpu cores'] ?? null;
+        return $cpuinfo['cpu cores'] ? (int)$cpuinfo['cpu cores'] : null;
     }
 
     /**

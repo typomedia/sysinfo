@@ -28,7 +28,7 @@ abstract class AbstractBsdProvider extends AbstractProvider
     public function getCpuCores()
     {
         $sysctl = PosixRepository::getSysctl('hw.ncpu');
-        return $sysctl['hw.ncpu'] ?? null;
+        return $sysctl['hw.ncpu'] ? (int)$sysctl['hw.ncpu'] : null;
     }
 
     /**
@@ -37,6 +37,6 @@ abstract class AbstractBsdProvider extends AbstractProvider
     public function getTotalMem()
     {
         $sysctl = PosixRepository::getSysctl('hw.physmem');
-        return $sysctl['hw.physmem'] ?? null;
+        return $sysctl['hw.physmem'] ? (int)$sysctl['hw.physmem'] : null;
     }
 }
