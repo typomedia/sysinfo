@@ -46,6 +46,6 @@ class LinuxProvider extends AbstractProvider
     public function getTotalMem()
     {
         $meminfo = LinuxRepository::getMemInfo();
-        return $meminfo['MemTotal'] ? (int)$meminfo['MemTotal'] : null;
+        return $meminfo['MemTotal'] ? (int)$meminfo['MemTotal'] * 1024 : null;
     }
 }
