@@ -36,7 +36,7 @@ class WindowsProvider extends AbstractProvider
     public function getCpuCores()
     {
         $wmic = explode(PHP_EOL, shell_exec('WMIC Cpu get NumberOfCores'));
-        return $wmic[1] ?? null;
+        return $wmic[1] ? (int)$wmic[1] : null;
     }
 
     /**
@@ -45,6 +45,6 @@ class WindowsProvider extends AbstractProvider
     public function getTotalMem()
     {
         $wmic = explode(PHP_EOL, shell_exec('WMIC ComputerSystem get TotalPhysicalMemory'));
-        return $wmic[1] ?? null;
+        return $wmic[1] ? (int)$wmic[1] : null;
     }
 }
