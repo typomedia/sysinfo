@@ -9,8 +9,8 @@ class WindowsProvider extends AbstractProvider
      */
     public function getOsRelease()
     {
-        preg_match('/\((.*)\)/', php_uname('a'), $matches);
-        return $matches[1] ?? null;
+        $wmic = explode(PHP_EOL, shell_exec('WMIC Os get Caption'));
+        return $wmic[1] ?? null;
     }
 
     /**
