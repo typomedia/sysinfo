@@ -11,7 +11,7 @@ class LinuxProvider extends AbstractProvider
      */
     public function getOsRelease()
     {
-        return trim(shell_exec('lsb_release -ds'));
+        return @parse_ini_file('/etc/os-release')['PRETTY_NAME'];
     }
 
     /**
