@@ -57,6 +57,7 @@ abstract class AbstractProvider implements ProviderInterface
      */
     public function getPhpVersion()
     {
-        return PHP_VERSION;
+        preg_match('/^\d+\.\d+\.\d+/', PHP_VERSION, $match);
+        return $match[0] ?? null;
     }
 }

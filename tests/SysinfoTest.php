@@ -45,7 +45,9 @@ class SysinfoTest extends TestCase
     {
         $phpVersion = $this->sysinfo->getPhpVersion();
         print 'PhpVersion: ' . $phpVersion . PHP_EOL;
-        $this->assertEquals(PHP_VERSION, $phpVersion);
+        // https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
+        $pattern = '/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/';
+        $this->assertRegExp($pattern, $phpVersion);
     }
 
     public function testGetArchitecture()
