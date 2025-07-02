@@ -9,8 +9,8 @@ class WindowsProvider extends AbstractProvider
      */
     public function getOsRelease()
     {
-        $wmic = explode(PHP_EOL, shell_exec('WMIC Os get Caption'));
-        return $wmic[1] ?? null;
+        $cim = shell_exec('powershell.exe -NoProfile -Command "Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object -ExpandProperty Caption"');
+        return $cim ?? null;
     }
 
     /**
@@ -26,8 +26,8 @@ class WindowsProvider extends AbstractProvider
      */
     public function getCpuModel()
     {
-        $wmic = explode(PHP_EOL, shell_exec('WMIC Cpu get Name'));
-        return $wmic[1] ?? null;
+        $cim = shell_exec('powershell.exe -NoProfile -Command "Get-CimInstance -ClassName Win32_Processor | Select-Object -ExpandProperty Name"');
+        return $cim ?? null;
     }
 
     /**
@@ -35,8 +35,8 @@ class WindowsProvider extends AbstractProvider
      */
     public function getCpuCores()
     {
-        $wmic = explode(PHP_EOL, shell_exec('WMIC Cpu get NumberOfCores'));
-        return $wmic[1] ? (int)$wmic[1] : null;
+        $cim = shell_exec('powershell.exe -NoProfile -Command "Get-CimInstance -ClassName Win32_Processor | Select-Object -ExpandProperty NumberOfLogicalProcessors"');
+        return $cim ? (int)$cim : null;
     }
 
     /**
@@ -44,7 +44,7 @@ class WindowsProvider extends AbstractProvider
      */
     public function getTotalMem()
     {
-        $wmic = explode(PHP_EOL, shell_exec('WMIC ComputerSystem get TotalPhysicalMemory'));
-        return $wmic[1] ? (int)$wmic[1] : null;
+        $cim = shell_exec('powershell.exe -NoProfile -Command "Get-CimInstance -ClassName Win32_ComputerSystem | Select-Object -ExpandProperty TotalPhysicalMemory"');
+        return $cim ? (int)$cim : null;
     }
 }
