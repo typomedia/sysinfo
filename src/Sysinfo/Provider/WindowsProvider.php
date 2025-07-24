@@ -27,7 +27,8 @@ class WindowsProvider extends AbstractProvider
     public function getCpuModel()
     {
         $cim = shell_exec('powershell.exe -NoProfile -Command "Get-CimInstance -ClassName Win32_Processor | Select-Object -ExpandProperty Name"');
-        return $cim ?? null;
+        $cim = strtok($cim, "\n");
+        return $cim ?: null;
     }
 
     /**
